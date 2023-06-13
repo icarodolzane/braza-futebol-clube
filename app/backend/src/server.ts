@@ -2,6 +2,6 @@ import { App } from './app';
 
 const PORT = process.env.APP_PORT || 3001;
 
-//Start project
+// Start project
 
 new App().start(PORT);
