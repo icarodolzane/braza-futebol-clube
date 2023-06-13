@@ -8,7 +8,6 @@ import {
 
 import db from '.';
 
-
 class SequelizeTeams extends Model<InferAttributes<SequelizeTeams>,
 InferCreationAttributes<SequelizeTeams>> {
   declare id: CreationOptional<number>;
@@ -26,11 +25,12 @@ SequelizeTeams.init({
   teamName: {
     type: DataTypes.STRING(100),
     allowNull: false,
-  }
+  },
 }, {
   sequelize: db,
   modelName: 'teams',
   timestamps: false,
   underscored: true,
 });
+
 export default SequelizeTeams;
