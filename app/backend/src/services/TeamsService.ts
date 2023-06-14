@@ -22,7 +22,7 @@ export default class TeamsService {
   public async getById(id: number): Promise<ServiceResponse<ITeams>> {
     const team = await this.teamsModel.findById(id);
     if (!team) {
-      const message = `Team with id ${id} not found`;
+      const message = 'Team not found';
       return { status: 'NOT_FOUND', data: { message } };
     }
     return {

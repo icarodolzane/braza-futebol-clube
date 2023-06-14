@@ -1,6 +1,6 @@
 import { ITeams} from '../../Interfaces/Teams/ITeams';
 
-const teams: ITeams[] = [
+export const teams: ITeams[] = [
   {
     "id": 1,
     "teamName": "Avaí/Kindermann"
@@ -67,5 +67,7 @@ const teams: ITeams[] = [
   }
 ];
 
-export default teams;
-
+export const teamWithValidID : ITeams = {
+  id: 1,
+  teamName: "Avaí/Kindermann"
+};
