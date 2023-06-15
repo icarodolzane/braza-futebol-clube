@@ -1,10 +1,10 @@
-import TeamsModel from '../models/TeamsModel';
+import TeamsModel from '../../models/TeamsModel';
 
-import { ITeams } from '../Interfaces/Teams/ITeams';
+import { ITeams } from '../../Interfaces/Teams/ITeams';
 
-import { ITeamsModel } from '../Interfaces/Teams/ITeamsModel';
+import { ITeamsModel } from '../../Interfaces/Teams/ITeamsModel';
 
-import { ServiceResponse } from '../Interfaces/ServiceResponse';
+import { ServiceResponse } from '../../Interfaces/ServiceResponse';
 
 export default class TeamsService {
   constructor(
