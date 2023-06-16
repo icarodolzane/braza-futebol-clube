@@ -68,4 +68,32 @@ describe('POST Login', () => {
       expect(response.body).to.have.key('message');
     })
    })
+  describe('GET /login/role', () => {
+    it('It should return the user role using a valid token', async function () {
+
+      const parameters = validBody;
+      const validUser = SequelizeUser.build(userMock);
+      sinon.stub(SequelizeUser, 'findOne').resolves(validUser);
+      const response = await chai.request(app).post('/login').send(parameters);
+
+      const { token } = response.body
+
+      const { body, status } = await chai.request(app).get('/login/role').set('authorization', token);
+
+      expect(status).to.be.equal(200)
+      expect(body).to.deep.equal({ role: validUser.role });
+    })
+    it('It should return a error message with 401 status when the token is missing', async function () {
+      const { body, status } = await chai.request(app).get('/login/role').set('authorization', '');
+
+      expect(status).to.be.equal(401)
+      expect(body.message).to.equal('Token not found');
+    })
+    it('It should return a error message with 401 status when the token is invalid', async function () {
+      const { body, status } = await chai.request(app).get('/login/role').set('authorization', 'fakeToken');
+
+      expect(status).to.be.equal(401)
+      expect(body.message).to.equal('Token must be a valid token');
+    })
+  })
 });

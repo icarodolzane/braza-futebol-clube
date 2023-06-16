@@ -17,4 +17,10 @@ const userRouter = Router();
 userRouter
   .post('/', LoginValidation.validateLogin, (req, res) => userController.login(req, res));
 
+userRouter.get(
+  '/role',
+  LoginValidation.validateToken,
+  (req, res) => userController.getRole(req, res),
+);
+
 export default userRouter;

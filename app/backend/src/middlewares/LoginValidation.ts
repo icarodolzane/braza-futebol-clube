@@ -1,7 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 import regex from '../utils/Constants';
+import TokenGeneratorJwt from '../services/Login/TokenGeneratorJwt';
 
 class LoginValidations {
+  static tokenGenerator: TokenGeneratorJwt = new TokenGeneratorJwt();
   static validateLogin(req: Request, res: Response, next: NextFunction): Response | void {
     const { email, password } = req.body;
 
@@ -14,6 +16,20 @@ class LoginValidations {
     }
 
     return next();
+  }
+
+  static validateToken(req: Request, res: Response, next: NextFunction): Response | void {
+    try {
+      const { authorization } = req.headers;
+      if (!authorization) {
+        return res.status(401).json({ message: 'Token not found' });
+      }
+      LoginValidations.tokenGenerator.verify(authorization);
+      next();
+    } catch (error) {
+      console.log(error);
+      return res.status(401).json({ message: 'Token must be a valid token' });
+    }
   }
 }
 
