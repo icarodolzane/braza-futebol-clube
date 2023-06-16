@@ -13,11 +13,15 @@ export default class UserService {
   public async login(email: string, password: string): Promise<ServiceResponse<{ token: string }>> {
     const user = await this.userModel.findByEmail(email);
 
-    if (!user) return { status: 'UNAUTHORIZED', data: { message: 'Email or password invalid' } };
+    if (!user) return { status: 'UNAUTHORIZED', data: { message: 'Invalid email or password' } };
 
     const isValid = await this.encrypts.compare(password, user.password);
 
-    if (!isValid) return { status: 'UNAUTHORIZED', data: { message: 'Email or password invalid' } };
+    if (!isValid) {
+      return {
+        status: 'UNAUTHORIZED',
+        data: { message: 'Invalid email or password' } };
+    }
 
     const token = this.tokenGenerator.generate(user);
 
