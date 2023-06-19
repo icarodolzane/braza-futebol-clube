@@ -29,4 +29,11 @@ export default class TeamController {
     const response = await this.matchesService.finishMatch(Number(id));
     return res.status(200).json(response.data);
   }
+
+  public async updateMatch(req: Request, res: Response) {
+    const { id } = req.params;
+    const data = req.body;
+    const response = await this.matchesService.updateMatch(Number(id), data);
+    return res.status(200).json(response.data);
+  }
 }

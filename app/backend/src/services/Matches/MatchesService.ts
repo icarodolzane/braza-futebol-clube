@@ -33,4 +33,9 @@ export default class MatchesService {
       data: { message: 'Finished' },
     };
   }
+
+  public async updateMatch(id: number, data: IMatches): Promise<ServiceResponse<unknown>> {
+    await this.matchesModel.update(id, data.homeTeamGoals, data.awayTeamGoals);
+    return { status: 'SUCCESSFUL', data: { message: 'Updated' } };
+  }
 }

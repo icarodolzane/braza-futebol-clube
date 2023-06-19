@@ -15,4 +15,10 @@ matchesRouter.patch(
   async (req: Request, res: Response) => matchesController.finishMatch(req, res),
 );
 
+matchesRouter.patch(
+  '/:id',
+  LoginValidations.validateToken,
+  async (req: Request, res: Response) => matchesController.updateMatch(req, res),
+);
+
 export default matchesRouter;
