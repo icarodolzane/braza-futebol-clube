@@ -4,8 +4,8 @@ import TeamsModel from '../models/TeamsModel';
 
 export default class TeamController {
   constructor(
-    private matchesService: MatchesService,
-    private teamsModel: TeamsModel,
+    private matchesService = new MatchesService(),
+    private teamsModel = new TeamsModel(),
   ) {}
 
   public async getAllMatchesSorted(req: Request, res: Response) {
