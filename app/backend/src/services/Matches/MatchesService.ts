@@ -25,4 +25,12 @@ export default class MatchesService {
       data: allMatches,
     };
   }
+
+  public async finishMatch(id: number): Promise<ServiceResponse<unknown>> {
+    await this.matchesModel.finishMatch(id);
+    return {
+      status: 'SUCCESSFUL',
+      data: { message: 'Finished' },
+    };
+  }
 }

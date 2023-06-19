@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express';
 import MatchesController from '../controllers/MatchesController';
-// import LoginValidations from '../middlewares/LoginValidation';
+import LoginValidations from '../middlewares/LoginValidation';
 
 const matchesController = new MatchesController();
 const matchesRouter = Router();
@@ -8,5 +8,11 @@ const matchesRouter = Router();
 matchesRouter.get('/', (req: Request, res: Response) => {
   matchesController.getAllMatchesSorted(req, res);
 });
+
+matchesRouter.patch(
+  '/:id/finish',
+  LoginValidations.validateToken,
+  async (req: Request, res: Response) => matchesController.finishMatch(req, res),
+);
 
 export default matchesRouter;
