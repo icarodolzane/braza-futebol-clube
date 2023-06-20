@@ -30,3 +30,11 @@ export const validBodyWrongPassword = {
   email: 'admin@user.com',
   password: 'wrong_password'
 }
+
+export const validUser: IUsers = {
+  id: 1,
+  email: 'admin@admin.com',
+  password: 'secret_admin',
+  role: 'admin',
+  username: 'Admin',
+}

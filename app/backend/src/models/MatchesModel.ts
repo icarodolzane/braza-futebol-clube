@@ -47,13 +47,16 @@ export default class MatchesModel implements IMatchesModel {
     homeTeamGoals: number,
     awayTeamGoals: number,
   ): Promise<unknown> {
-    return this.model.update(
+    await this.model.update(
       {
         homeTeamGoals,
         awayTeamGoals,
       },
       { where: { id } },
     );
+    const updated = await this.model.findByPk(id);
+    if (!updated) return null;
+    return { status: 'SUCCESSFUL', data: { message: 'Updated' } };
   }
 
   async create(

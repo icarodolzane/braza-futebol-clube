@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import MatchesService from '../services/Matches/MatchesService';
 import TeamsModel from '../models/TeamsModel';
+import mapStatusHTTP from '../utils/mapStatusHTTP';
 
 export default class TeamController {
   constructor(
@@ -34,6 +35,6 @@ export default class TeamController {
     const { id } = req.params;
     const data = req.body;
     const response = await this.matchesService.updateMatch(Number(id), data);
-    return res.status(200).json(response.data);
+    return res.status(mapStatusHTTP(response.status)).json(response.data);
   }
 }

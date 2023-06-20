@@ -35,7 +35,10 @@ export default class MatchesService {
   }
 
   public async updateMatch(id: number, data: IMatches): Promise<ServiceResponse<unknown>> {
-    await this.matchesModel.update(id, data.homeTeamGoals, data.awayTeamGoals);
+    const update = await this.matchesModel.update(id, data.homeTeamGoals, data.awayTeamGoals);
+    if (update === null) {
+      return { status: 'NOT_FOUND', data: { message: 'Match not found' } };
+    }
     return { status: 'SUCCESSFUL', data: { message: 'Updated' } };
   }
 }
