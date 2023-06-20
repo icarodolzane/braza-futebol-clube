@@ -37,4 +37,23 @@ export default class TeamController {
     const response = await this.matchesService.updateMatch(Number(id), data);
     return res.status(mapStatusHTTP(response.status)).json(response.data);
   }
+
+  public async createMatch(req: Request, res: Response) {
+    const data = req.body;
+    const { homeTeamId, awayTeamId } = data;
+
+    if (homeTeamId === awayTeamId) {
+      return res
+        .status(422)
+        .json({ message: 'It is not possible to create a match with two equal teams' });
+    }
+    const homeTeam = await this.teamsModel.findById(homeTeamId);
+    const awayTeam = await this.teamsModel.findById(awayTeamId);
+
+    if (!homeTeam || !awayTeam) {
+      return res.status(404).json({ message: 'There is no team with such id!' });
+    }
+    const newMatch = await this.matchesService.createMatch(data);
+    return res.status(201).json(newMatch.data);
+  }
 }

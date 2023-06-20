@@ -41,4 +41,14 @@ export default class MatchesService {
     }
     return { status: 'SUCCESSFUL', data: { message: 'Updated' } };
   }
+
+  public async createMatch(data: IMatches): Promise<ServiceResponse<unknown>> {
+    const newMatch = await this
+      .matchesModel
+      .create(data.homeTeamId, data.awayTeamId, data.homeTeamGoals, data.awayTeamGoals);
+    return {
+      status: 'SUCCESSFUL',
+      data: newMatch,
+    };
+  }
 }
