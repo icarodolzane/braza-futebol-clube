@@ -56,4 +56,9 @@ export default class TeamController {
     const newMatch = await this.matchesService.createMatch(data);
     return res.status(201).json(newMatch.data);
   }
+
+  public async leaderBoard(req: Request, res: Response) {
+    const serviceResponse = await this.matchesService.leader();
+    return res.status(200).json(serviceResponse.data);
+  }
 }

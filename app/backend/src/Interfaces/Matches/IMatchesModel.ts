@@ -1,3 +1,4 @@
+import { StatsReturn } from '../../Types/StatsReturn';
 import { IMatches } from './IMatches';
 
 export interface IMatchesModel {
@@ -8,5 +9,5 @@ export interface IMatchesModel {
   finishMatch(id: number): Promise<unknown>,
   create(homeTeamId: number,
     awayTeamId: number, homeTeamGoals: number, awayTeamGoals: number): Promise<unknown>,
-
+  leader(): Promise<StatsReturn[]>,
 }
