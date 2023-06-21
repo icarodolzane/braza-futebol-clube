@@ -1,12 +1,9 @@
+import { IMatches } from '../Interfaces/Matches/IMatches';
+
 export type StatsReturn = {
-  name: string;
-  totalPoints: number;
-  totalGames: number;
-  totalVictories: number;
-  totalDraws: number;
-  totalLosses: number;
+  wins: IMatches[];
+  draws: IMatches[];
+  losses: IMatches[];
   goalsFavor: number;
   goalsOwn: number;
-  goalsBalance: number;
-  efficiency: string;
 };

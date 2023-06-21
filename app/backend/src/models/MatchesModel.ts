@@ -2,9 +2,6 @@ import SequelizeTeams from '../database/models/SequelizeTeam';
 import { IMatches } from '../Interfaces/Matches/IMatches';
 import { IMatchesModel } from '../Interfaces/Matches/IMatchesModel';
 import SequelizeMatches from '../database/models/SequelizeMatch';
-import { StatsReturn } from '../Types/StatsReturn';
-import TeamsModel from './TeamsModel';
-import boardCalculator from '../utils/LeaderborderFunctions';
 
 export default class MatchesModel implements IMatchesModel {
   private model = SequelizeMatches;
@@ -87,12 +84,5 @@ export default class MatchesModel implements IMatchesModel {
       { inProgress: false },
       { where: { id } },
     );
-  }
-
-  async leader(): Promise<StatsReturn[]> {
-    const teamsModel = new TeamsModel();
-    const teams = await teamsModel.findAll();
-    const matches = await this.getAllMatchesSorted(false);
-    return boardCalculator(teams, matches);
   }
 }

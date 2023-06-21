@@ -2,7 +2,6 @@ import { IMatches } from '../../Interfaces/Matches/IMatches';
 import { ServiceResponse } from '../../Interfaces/ServiceResponse';
 import { IMatchesModel } from '../../Interfaces/Matches/IMatchesModel';
 import MatchesModel from '../../models/MatchesModel';
-import { StatsReturn } from '../../Types/StatsReturn';
 
 export default class MatchesService {
   constructor(
@@ -51,10 +50,5 @@ export default class MatchesService {
       status: 'SUCCESSFUL',
       data: newMatch,
     };
-  }
-
-  public async leader(): Promise<ServiceResponse<StatsReturn[]>> {
-    const list = await this.matchesModel.leader();
-    return { status: 'SUCCESSFUL', data: list };
   }
 }
